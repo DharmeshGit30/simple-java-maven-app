@@ -19,6 +19,8 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <sonar.organization>dharmeshgit30</sonar.organization>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+    <sonar.projectKey>DharmeshGit30_simple-java-maven-app</sonar.projectKey>
+    <sonar.projectName>simple-java-maven-app</sonar.projectName>
   </properties>
   <build>
     <pluginManagement>
