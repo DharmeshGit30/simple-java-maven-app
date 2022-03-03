@@ -1,11 +1,26 @@
+def mvn
 pipeline {
-    agent {
-        docker {
-            image 'maven:3-alpine'
-            args '-v /root/.m2:/root/.m2'
-        }
+  agent { label 'master' }
+    tools {
+      maven 'Maven3'
+      jdk 'JAVA_HOME'
     }
     stages {
+        stage('SonarCloud') { //Trigger SonarCloud to check Bugs and vilations 
+            environment {
+                SCANNER_HOME = tool 'SonarQubeScanner'
+                ORGANIZATION = "dharmeshgit30"
+                PROJECT_NAME = "simple-java-maven-app"
+            }
+            steps {
+              withSonarQubeEnv('Sonar-Cloud') {
+                sh '''$SCANNER_HOME/bin/sonar-scanner -Dsonar.organization=$ORGANIZATION \
+                -Dsonar.java.binaries=build/classes/java/ \
+                -Dsonar.projectKey=$PROJECT_NAME \
+                -Dsonar.sources=.'''
+              }
+            }
+        }    
         stage('Build') {
             steps {
                 sh 'mvn -B -DskipTests clean package'
@@ -21,10 +36,10 @@ pipeline {
                 }
             }
         }
-        stage('Deliver') {
-            steps {
-                sh './jenkins/scripts/deliver.sh'
-            }
-        }
+//        stage('Deliver') {
+//            steps {
+//                sh './jenkins/scripts/deliver.sh'
+//            }
+//        }
     }
 }
