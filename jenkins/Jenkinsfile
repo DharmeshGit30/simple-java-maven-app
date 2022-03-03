@@ -20,7 +20,7 @@ pipeline {
             steps {
               withSonarQubeEnv('Sonar-Cloud') {
                 sh '''$SCANNER_HOME/bin/sonar-scanner -Dsonar.organization=$ORGANIZATION \
-                -Dsonar.projectKey=$PROJECT_KEY \ 
+                -Dsonar.projectKey=$PROJECT_KEY  
                 -Dsonar.sources=.claspath'''
               }
             }
