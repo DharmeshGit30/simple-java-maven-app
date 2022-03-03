@@ -3,7 +3,7 @@ pipeline {
   agent any
     tools {
       maven 'Maven3'
-      jdk 'JAVA_HOME'
+//      jdk 'JAVA_HOME'
     }
     stages {
         stage('SonarCloud') { //Trigger SonarCloud to check Bugs and vilations 
